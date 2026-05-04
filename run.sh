@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Build Syncthing .spk packages for the Synology devices in this household:
-#   - silos     : DS213j (armada370, DSM 6.x max)
+#   - silos     : DS213j (armada370, running DSM 7.1.1)
 #   - twardziel : DS216j (armada38x, supports DSM 6 and 7)
 #
 # The actual compilation runs inside a Docker container built from ./Dockerfile,
@@ -29,9 +29,11 @@ docker run --rm \
   bash -eu -o pipefail -c '
     cd /spksrc/spk/syncthing
 
-    # DS213j / armada370 — DSM 6.x is the highest this device supports.
-    echo "---- arch-armada370-6.1 (DS213j) ----"
-    make arch-armada370-6.1
+    # DS213j / armada370 — silos is running DSM 7.1.1 (custom firmware;
+    # Synology officially caps this model at DSM 6.2). spksrc supports
+    # building against the 7.1 toolchain for armada370.
+    echo "---- arch-armada370-7.1 (DS213j, DSM 7.1) ----"
+    make arch-armada370-7.1
 
     # DS216j / armada38x — DSM 7.0 build (preferred if device is on DSM 7).
     echo "---- arch-armada38x-7.0 (DS216j, DSM 7) ----"
