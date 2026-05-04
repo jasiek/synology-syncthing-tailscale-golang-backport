@@ -81,6 +81,25 @@ RUN set -eu; \
       echo "${TARBALL} MD5 ${MD5}"; \
     } > /spksrc/native/go/digests
 
+# ---------------------------------------------------------------------------
+# Syncthing version
+# ---------------------------------------------------------------------------
+# spksrc's cross/syncthing recipe pins to whatever version was current when
+# the spksrc tree was tagged. Override it so we build the version we actually
+# want — without waiting for spksrc to bump.
+ARG SYNCTHING_VERS=2.0.16
+ARG SYNCTHING_SHA1=ee8e4de9606805388a14fffa80d26caf4492d0ea
+ARG SYNCTHING_SHA256=f93836f943967c8fe608e90fd6dc2c419ce00cfa0ca5266caa86c22ae290f169
+ARG SYNCTHING_MD5=3264925246c814eb46dfdf6ecb43f524
+RUN set -eu; cd /spksrc/cross/syncthing; \
+    sed -i "s/^PKG_VERS = .*/PKG_VERS = ${SYNCTHING_VERS}/" Makefile; \
+    { \
+      echo "syncthing-source-v${SYNCTHING_VERS}.tar.gz SHA1 ${SYNCTHING_SHA1}"; \
+      echo "syncthing-source-v${SYNCTHING_VERS}.tar.gz SHA256 ${SYNCTHING_SHA256}"; \
+      echo "syncthing-source-v${SYNCTHING_VERS}.tar.gz MD5 ${SYNCTHING_MD5}"; \
+    } > digests; \
+    sed -i "s/^SPK_VERS = .*/SPK_VERS = ${SYNCTHING_VERS}/" /spksrc/spk/syncthing/Makefile
+
 WORKDIR /spksrc
 
 CMD ["bash"]

@@ -56,9 +56,9 @@ The build produces three packages, tuned for the devices in this household:
 
 | File | Device | Arch | DSM |
 |---|---|---|---|
-| `syncthing_armada370-7.1_2.0.14-34.spk` | DS213j ("silos") | armada370 | 7.1 |
-| `syncthing_armada38x-7.0_2.0.14-34.spk` | DS216j ("twardziel") | armada38x | 7.0 |
-| `syncthing_armada38x-6.1_2.0.14-34.spk` | DS216j fallback | armada38x | 6.1 |
+| `syncthing_armada370-7.1_2.0.16-34.spk` | DS213j ("silos") | armada370 | 7.1 |
+| `syncthing_armada38x-7.0_2.0.16-34.spk` | DS216j ("twardziel") | armada38x | 7.0 |
+| `syncthing_armada38x-6.1_2.0.16-34.spk` | DS216j fallback | armada38x | 6.1 |
 
 To build for different devices, edit the `make arch-...` lines in `run.sh`.
 Supported toolchains live under `/spksrc/toolchain/` inside the image
